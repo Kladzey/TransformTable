@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using FluentAssertions;
+using Kladzey.TransformCsv.Tests.TestTools;
 using Kladzey.TransformTable.Logic;
 using Xunit;
 
@@ -27,10 +28,10 @@ namespace Kladzey.TransformCsv.Tests.Logic
             sut.Transform(input, output, "select col1 + col2 sum from data where col2 > 0 order by col1");
 
             // Then
-            output.ToString().Should().Be(@"sum
+            output.ToString().NormalizeLineEndings().Should().Be(@"sum
 5
 7
-");
+".NormalizeLineEndings());
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Kladzey.TransformCsv.Tests.TestTools;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -57,7 +58,8 @@ namespace Kladzey.TransformCsv.Tests
             // Then
             testOutputHelper.WriteLine(process.StandardError.ReadToEnd());
             process.ExitCode.Should().Be(0);
-            process.StandardOutput.ReadToEnd().Should().Be(expectedOutput);
+            process.StandardOutput.ReadToEnd().NormalizeLineEndings().Should()
+                .Be(expectedOutput.NormalizeLineEndings());
         }
 
         private string GetSolutionPath()
